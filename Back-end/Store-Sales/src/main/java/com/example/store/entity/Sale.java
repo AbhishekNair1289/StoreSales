@@ -9,10 +9,8 @@ import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 
 @Entity
-
 public class Sale {
-
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -50,18 +48,96 @@ public class Sale {
 
     @NotNull(message = "Product category is required")
     private String productCategory;
-    
-    public Sale(){
-    	
+
+    // Getters and Setters
+
+    public Long getId() {
+        return id;
     }
 
-	@Override
-	public String toString() {
-		return "Sale [id=" + id + ", item=" + item + ", quantity=" + quantity + ", pricePerUnit=" + pricePerUnit
-				+ ", totalPrice=" + totalPrice + ", date=" + date + ", customerName=" + customerName
-				+ ", customerEmail=" + customerEmail + ", paymentMethod=" + paymentMethod + ", discount=" + discount
-				+ ", productCategory=" + productCategory + "]";
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getItem() {
+        return item;
+    }
+
+    public void setItem(String item) {
+        this.item = item;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public double getPricePerUnit() {
+        return pricePerUnit;
+    }
+
+    public void setPricePerUnit(double pricePerUnit) {
+        this.pricePerUnit = pricePerUnit;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
+
+    public String getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(String productCategory) {
+        this.productCategory = productCategory;
+    }
 
 	public Sale(@NotNull(message = "Item is required") String item,
 			@NotNull(message = "Quantity is required") @Min(1) int quantity,
@@ -86,93 +162,8 @@ public class Sale {
 		this.productCategory = productCategory;
 	}
 
-	public Long getId() {
-		return id;
+	public Sale() {
+		super();
 	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getItem() {
-		return item;
-	}
-
-	public void setItem(String item) {
-		this.item = item;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	public double getPricePerUnit() {
-		return pricePerUnit;
-	}
-
-	public void setPricePerUnit(double pricePerUnit) {
-		this.pricePerUnit = pricePerUnit;
-	}
-
-	public double getTotalPrice() {
-		return totalPrice;
-	}
-
-	public void setTotalPrice(double totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-
-	public LocalDate getDate() {
-		return date;
-	}
-
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
-
-	public String getCustomerName() {
-		return customerName;
-	}
-
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
-
-	public String getCustomerEmail() {
-		return customerEmail;
-	}
-
-	public void setCustomerEmail(String customerEmail) {
-		this.customerEmail = customerEmail;
-	}
-
-	public String getPaymentMethod() {
-		return paymentMethod;
-	}
-
-	public void setPaymentMethod(String paymentMethod) {
-		this.paymentMethod = paymentMethod;
-	}
-
-	public double getDiscount() {
-		return discount;
-	}
-
-	public void setDiscount(double discount) {
-		this.discount = discount;
-	}
-
-	public String getProductCategory() {
-		return productCategory;
-	}
-
-	public void setProductCategory(String productCategory) {
-		this.productCategory = productCategory;
-	}
-    
     
 }
