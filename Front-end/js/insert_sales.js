@@ -1,64 +1,63 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("sales-form");
-  form.addEventListener("submit", function (event) {
-      event.preventDefault();
+  const unitPriceInput = document.getElementById("pricePerUnit");
+  const quantityInput = document.getElementById("quantity");
+  const discountInput = document.getElementById("discount");
+  const totalPriceInput = document.getElementById("totalPrice");
+  const dateInput = document.getElementById("date");
 
-      // Get form data
-      const item = document.getElementById("item").value;
-      const quantity = document.getElementById("quantity").value;
-      const pricePerUnit = document.getElementById("pricePerUnit").value;
-      const totalPrice = document.getElementById("totalPrice").value;
-      const date = document.getElementById("date").value;
-      const customerName = document.getElementById("customerName").value;
-      const customerEmail = document.getElementById("customerEmail").value;
-      const paymentMethod = document.getElementById("paymentMethod").value;
-      const discount = document.getElementById("discount").value;
-      const productCategory = document.getElementById("productCategory").value;
+  // Set today's date in the date input field
+  const today = new Date().toISOString().split("T")[0];
+  dateInput.value = today;
 
-      // Prepare the payload
-      const payload = {
-          item: item,
-          quantity: quantity,
-          pricePerUnit: pricePerUnit,
-          totalPrice: totalPrice,
-          date: date,
-          customerName: customerName,
-          customerEmail: customerEmail,
-          paymentMethod: paymentMethod,
-          discount: discount,
-          productCategory: productCategory,
-      };
+  // Calculate total price
+  const calculateTotalPrice = () => {
+    const unitPrice = parseFloat(unitPriceInput.value) || 0;
+    const quantity = parseInt(quantityInput.value) || 0;
+    const discount = parseFloat(discountInput.value) || 0;
 
-      // Send POST request to the backend
-      fetch("http://127.0.0.1:8080/api/sales/insert_sales", {
+    const totalPrice = unitPrice * quantity * (1 - discount / 100);
+    totalPriceInput.value = totalPrice.toFixed(2);
+  };
+
+  // Event listeners to recalculate total price
+  unitPriceInput.addEventListener("input", calculateTotalPrice);
+  quantityInput.addEventListener("input", calculateTotalPrice);
+  discountInput.addEventListener("input", calculateTotalPrice);
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const salesData = Object.fromEntries(formData.entries());
+
+    console.log("Sales Data:", salesData); // Debugging line to inspect sales data
+
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:8080/api/sales/insert_sales",
+        {
           method: "POST",
           headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify(payload),
-      })
-          .then((response) => {
-              if (!response.ok) {
-                  return response.json().then((errorData) => {
-                      throw new Error(errorData.message || "Something went wrong");
-                  });
-              }
-              return response.json();
-          })
-          .then((data) => {
-              console.log("Success:", data);   // Display success message to the user
-              document.getElementById("message").innerText =
-                  "Sale inserted successfully!";
-              document.getElementById("message").style.backgroundColor = "#4CAF50";
-              form.reset();
-          })
-          .catch((error) => {
-              console.error("Error:", error);  // Display error message to the user
-              document.getElementById(
-                  "message"
-              ).innerText = `Error: ${error.message}`;
-              document.getElementById("message").style.backgroundColor = "#f44336";
-          });
+          body: JSON.stringify(salesData),
+        }
+      );
+
+      if (!response.ok) {
+        const errorDetails = await response.json();
+        throw new Error(`Failed to insert sales data: ${errorDetails.message}`);
+      }
+
+      const result = await response.json();
+      message.innerText = "Sale inserted successfully!";
+      message.classList.add("success");
+      message.classList.remove("error");
+    } catch (error) {
+      console.error("Error:", error);
+      message.innerText = `Error: ${error.message}`;
+      message.classList.add("error");
+      message.classList.remove("success");
+    }
   });
 });

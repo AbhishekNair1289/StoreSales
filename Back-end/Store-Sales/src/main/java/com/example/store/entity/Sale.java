@@ -14,6 +14,9 @@ public class Sale {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Item Code is required")
+    private String itemCode;
+    
     @NotNull(message = "Item is required")
     private String item;
 
@@ -49,7 +52,16 @@ public class Sale {
     @NotNull(message = "Product category is required")
     private String productCategory;
 
-    public Long getId() {
+    
+    public String getItemCode() {
+		return itemCode;
+	}
+
+	public void setItemCode(String itemCode) {
+		this.itemCode = itemCode;
+	}
+
+	public Long getId() {
         return id;
     }
 
@@ -137,7 +149,8 @@ public class Sale {
         this.productCategory = productCategory;
     }
 
-	public Sale(@NotNull(message = "Item is required") String item,
+	public Sale(@NotNull(message = "Item Code is required") String itemCode,
+			@NotNull(message = "Item is required") String item,
 			@NotNull(message = "Quantity is required") @Min(1) int quantity,
 			@NotNull(message = "Price per unit is required") @Min(0) double pricePerUnit,
 			@NotNull(message = "Total price is required") @Min(0) double totalPrice,
@@ -148,6 +161,7 @@ public class Sale {
 			@NotNull(message = "Discount is required") @Min(0) double discount,
 			@NotNull(message = "Product category is required") String productCategory) {
 		super();
+		this.itemCode = itemCode;
 		this.item = item;
 		this.quantity = quantity;
 		this.pricePerUnit = pricePerUnit;

@@ -5,59 +5,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insert Sales</title>
-    <link rel="stylesheet" href="css/styles.css"> 
+    <link rel="stylesheet" href="css/styles1.css">
 </head>
 
 <body>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
     <header>
         <h1>Store Sales Application</h1>
     </header>
     <nav>
-        <a href="index.html">Home</a>
-        <a href="insert_sales.html">Insert Sales</a>
-        <a href="view_sales.html">View Sales</a>
+        <div class="menu-icon" id="menu-icon">
+            ☰
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="insert_sales.html">Insert Sales</a></li>
+            <li><a href="view_sales.html">View Sales</a></li>
+        </ul>
     </nav>
-    <div class="container">
-        <h2>Insert Sales Data</h2>
+    <div class="container1">
+        <h2 style="text-align: center; text-shadow: 5px;">Insert Sales Data</h2>
+        <div class="wave"></div>
         <div id="message" class="message"></div>
         <form id="sales-form">
-            <label for="item">Item</label>
-            <input type="text" id="item" name="item" required>
+            <div class="form-row">
+                <div class="form-column">
+                    <label for="itemCode">Item Code</label>
+                    <input type="text" id="itemCode" name="itemCode" minlength="5" maxlength="10" required>
+                </div>
+                <div class="form-column">
+                    <label for="item">Item</label>
+                    <input type="text" id="item" name="item" minlength="3" maxlength="20" required>
+                </div>
+                <div class="form-column">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" name="quantity" minlength="1" maxlength="5" required>
+                </div>
+            </div class="form-row">
+            <div>
+                <div class="form-column">
+                    <label for="pricePerUnit">Price per Unit</label>
+                    <input type="number" id="pricePerUnit" name="pricePerUnit" minlength="1" maxlength="8" required>
+                </div>
+                <div class="form-column">
+                    <label for="discount">Discount (%)</label>
+                    <input type="number" id="discount" name="discount" value="0" minlength="1" maxlength="2" required>
+                </div>
+                <div class="form-column">
+                    <label for="totalPrice">Total Price</label>
+                    <input type="number" id="totalPrice" name="totalPrice" readonly>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-column">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-column">
+                    <label for="customerName">Customer Name</label>
+                    <input type="text" id="customerName" name="customerName" minlength="3" maxlength="15" required>
+                </div>
+                <div class="form-column">
+                    <label for="customerEmail">Customer Email</label>
+                    <input type="email" id="customerEmail" name="customerEmail" minlength="5" maxlength="25" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-column">
+                    <label for="paymentMethod">Payment Method</label>
+                    <select id="paymentMethod" name="paymentMethod" required>
+                        <option value="cash">Cash</option>
+                        <option value="credit-card">Credit Card</option>
+                        <option value="debit-card">Debit Card</option>
+                        <option value="online">Online</option>
+                    </select>
+                </div>
+                <div class="form-column">
+                    <label for="productCategory">Product Category</label>
+                    <input type="text" id="productCategory" name="productCategory" required>
+                </div>
+            </div>
 
-            <label for="quantity">Quantity</label>
-            <input type="number" id="quantity" name="quantity" min="1" required>
+            <div class="form-row">
+                <input type="submit" value="Insert Sale">
+            </div>
 
-            <label for="pricePerUnit">Price per Unit</label>
-            <input type="number" id="pricePerUnit" name="pricePerUnit" step="0.01" min="0.01" required>
-
-            <label for="totalPrice">Total Price</label>
-            <input type="number" id="totalPrice" name="totalPrice" step="0.01" min="0.01" required>
-
-            <label for="date">Date</label>
-            <input type="date" id="date" name="date" required>
-
-            <label for="customerName">Customer Name</label>
-            <input type="text" id="customerName" name="customerName" required>
-
-            <label for="customerEmail">Customer Email</label>
-            <input type="email" id="customerEmail" name="customerEmail" required>
-
-            <label for="paymentMethod">Payment Method</label>
-            <select id="paymentMethod" name="paymentMethod" required>
-                <option value="cash">Cash</option>
-                <option value="credit">Credit</option>
-                <option value="debit">Debit</option>
-            </select>
-
-            <label for="discount">Discount (%)</label>
-            <input type="number" id="discount" name="discount" step="0.01" min="0" max="100" required>
-
-            <label for="productCategory">Product Category</label>
-            <input type="text" id="productCategory" name="productCategory" required>
-
-            <input type="submit" value="Insert Sale">
         </form>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const menuIcon = document.getElementById("menu-icon");
+            const navLinks = document.getElementById("nav-links");
+
+            menuIcon.addEventListener("click", () => {
+                navLinks.classList.toggle("active");
+            });
+        });
+    </script>
+
     <script src="js/insert_sales.js"></script>
 </body>
 
