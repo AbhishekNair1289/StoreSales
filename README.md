@@ -1,5 +1,19 @@
 # Store Sales Application
 
+## Screenshots
+
+![Screenshot 2024-07-31 151056](https://github.com/user-attachments/assets/47e5e6b3-15a1-4dee-a810-71b15d458a1b)
+
+![Screenshot 2024-07-31 151059](https://github.com/user-attachments/assets/d3f4c51c-10a3-4b21-af45-598cdda7eb7f)
+
+![Screenshot 2024-07-31 151040](https://github.com/user-attachments/assets/4bd550b6-c4ab-4fcb-a5d3-8c53c2e93bc5)
+
+![Screenshot 2024-07-31 151045](https://github.com/user-attachments/assets/3fe927b8-7549-4afa-a122-5e5b691705f6)
+
+![Screenshot 2024-07-31 150643](https://github.com/user-attachments/assets/e51abf35-f789-44b3-88d3-f3e78b16f297)
+
+![Screenshot 2024-07-31 151126](https://github.com/user-attachments/assets/40001a4a-9da6-4c89-9bb5-a78317243026)
+
 ## Overview
 
 The Store Sales Application is a web-based platform for managing and visualizing sales data. It allows users to insert new sales records, view and filter existing sales records, and visualize sales data using charts. The application is built using HTML, CSS, JavaScript for the frontend, and Spring Boot for the backend.
@@ -130,4 +144,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-For any inquiries, please contact [abhisheknair0925@example.com](mailto:abhsiehknair0925@example.com).
+For any inquiries, please contact [abhisheknair0925@example.com](mailto:abhsiehknair0925@example.com) or +91 75928 61101.
