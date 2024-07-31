@@ -3,18 +3,23 @@ package com.example.store.service;
 import com.example.store.entity.Sale;
 import com.example.store.repo.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import jakarta.validation.Valid;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.List;
 
+@Service
 public class SaleServiceImpl implements SaleService{
+
     @Autowired
-    private SaleRepository saleRepository;
+    SaleRepository repo;
 
     @Override
-    public Sale insertSale(Sale sale) {
-        return saleRepository.save(sale);
+    public Sale insertSale(@Valid Sale sale)  {
+        
+        return repo.save(sale);
     }
 
     @Override
@@ -22,6 +27,13 @@ public class SaleServiceImpl implements SaleService{
         YearMonth thisMonth = YearMonth.now();
         LocalDate startDate = thisMonth.atDay(1);
         LocalDate endDate = thisMonth.atEndOfMonth();
-        return saleRepository.findByDateBetween(startDate, endDate);
+        return repo.findByDateBetween(startDate, endDate);
     }
+
+	@Override
+	public List<Sale> getAllSales() {
+		return repo.findAll();
+	}
+    
+    
 }

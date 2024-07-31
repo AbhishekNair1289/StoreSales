@@ -1,5 +1,6 @@
 package com.example.store.entity;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -7,124 +8,171 @@ import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 
+@Entity
+
 public class Sale {
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
+    private Long id;
 
-    @NotEmpty(message = "Item is required")
+    @NotNull(message = "Item is required")
     private String item;
 
-    @Min(value = 1, message = "Quantity must be at least 1")
+    @NotNull(message = "Quantity is required")
+    @Min(1)
     private int quantity;
 
-    @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than 0")
-    private double price;
+    @NotNull(message = "Price per unit is required")
+    @Min(0)
+    private double pricePerUnit;
+
+    @NotNull(message = "Total price is required")
+    @Min(0)
+    private double totalPrice;
 
     @NotNull(message = "Date is required")
     private LocalDate date;
 
-    @NotEmpty(message = "Customer name is required")
+    @NotNull(message = "Customer name is required")
     private String customerName;
 
-    @Email(message = "Customer email should be valid")
+    @NotNull(message = "Customer email is required")
+    @Email
     private String customerEmail;
 
-    @NotEmpty(message = "Payment method is required")
+    @NotNull(message = "Payment method is required")
     private String paymentMethod;
 
-    public Sale() {
+    @NotNull(message = "Discount is required")
+    @Min(0)
+    private double discount;
+
+    @NotNull(message = "Product category is required")
+    private String productCategory;
+    
+    public Sale(){
+    	
     }
 
-    public Sale(Long id, String item, int quantity, double price, LocalDate date, String customerName, String customerEmail, String paymentMethod) {
-        this.id = id;
-        this.item = item;
-        this.quantity = quantity;
-        this.price = price;
-        this.date = date;
-        this.customerName = customerName;
-        this.customerEmail = customerEmail;
-        this.paymentMethod = paymentMethod;
-    }
+	@Override
+	public String toString() {
+		return "Sale [id=" + id + ", item=" + item + ", quantity=" + quantity + ", pricePerUnit=" + pricePerUnit
+				+ ", totalPrice=" + totalPrice + ", date=" + date + ", customerName=" + customerName
+				+ ", customerEmail=" + customerEmail + ", paymentMethod=" + paymentMethod + ", discount=" + discount
+				+ ", productCategory=" + productCategory + "]";
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Sale(@NotNull(message = "Item is required") String item,
+			@NotNull(message = "Quantity is required") @Min(1) int quantity,
+			@NotNull(message = "Price per unit is required") @Min(0) double pricePerUnit,
+			@NotNull(message = "Total price is required") @Min(0) double totalPrice,
+			@NotNull(message = "Date is required") LocalDate date,
+			@NotNull(message = "Customer name is required") String customerName,
+			@NotNull(message = "Customer email is required") @Email String customerEmail,
+			@NotNull(message = "Payment method is required") String paymentMethod,
+			@NotNull(message = "Discount is required") @Min(0) double discount,
+			@NotNull(message = "Product category is required") String productCategory) {
+		super();
+		this.item = item;
+		this.quantity = quantity;
+		this.pricePerUnit = pricePerUnit;
+		this.totalPrice = totalPrice;
+		this.date = date;
+		this.customerName = customerName;
+		this.customerEmail = customerEmail;
+		this.paymentMethod = paymentMethod;
+		this.discount = discount;
+		this.productCategory = productCategory;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public @NotEmpty(message = "Item is required") String getItem() {
-        return item;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setItem(@NotEmpty(message = "Item is required") String item) {
-        this.item = item;
-    }
+	public String getItem() {
+		return item;
+	}
 
-    @Min(value = 1, message = "Quantity must be at least 1")
-    public int getQuantity() {
-        return quantity;
-    }
+	public void setItem(String item) {
+		this.item = item;
+	}
 
-    public void setQuantity(@Min(value = 1, message = "Quantity must be at least 1") int quantity) {
-        this.quantity = quantity;
-    }
+	public int getQuantity() {
+		return quantity;
+	}
 
-    @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than 0")
-    public double getPrice() {
-        return price;
-    }
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 
-    public void setPrice(@DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than 0") double price) {
-        this.price = price;
-    }
+	public double getPricePerUnit() {
+		return pricePerUnit;
+	}
 
-    public @NotNull(message = "Date is required") LocalDate getDate() {
-        return date;
-    }
+	public void setPricePerUnit(double pricePerUnit) {
+		this.pricePerUnit = pricePerUnit;
+	}
 
-    public void setDate(@NotNull(message = "Date is required") LocalDate date) {
-        this.date = date;
-    }
+	public double getTotalPrice() {
+		return totalPrice;
+	}
 
-    public @NotEmpty(message = "Customer name is required") String getCustomerName() {
-        return customerName;
-    }
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 
-    public void setCustomerName(@NotEmpty(message = "Customer name is required") String customerName) {
-        this.customerName = customerName;
-    }
+	public LocalDate getDate() {
+		return date;
+	}
 
-    public @Email(message = "Customer email should be valid") String getCustomerEmail() {
-        return customerEmail;
-    }
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
 
-    public void setCustomerEmail(@Email(message = "Customer email should be valid") String customerEmail) {
-        this.customerEmail = customerEmail;
-    }
+	public String getCustomerName() {
+		return customerName;
+	}
 
-    public @NotEmpty(message = "Payment method is required") String getPaymentMethod() {
-        return paymentMethod;
-    }
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
 
-    public void setPaymentMethod(@NotEmpty(message = "Payment method is required") String paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
+	public String getCustomerEmail() {
+		return customerEmail;
+	}
 
-    @Override
-    public String toString() {
-        return "Sale{" +
-                "id=" + id +
-                ", item='" + item + '\'' +
-                ", quantity=" + quantity +
-                ", price=" + price +
-                ", date=" + date +
-                ", customerName='" + customerName + '\'' +
-                ", customerEmail='" + customerEmail + '\'' +
-                ", paymentMethod='" + paymentMethod + '\'' +
-                '}';
-    }
+	public void setCustomerEmail(String customerEmail) {
+		this.customerEmail = customerEmail;
+	}
+
+	public String getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+	public double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(double discount) {
+		this.discount = discount;
+	}
+
+	public String getProductCategory() {
+		return productCategory;
+	}
+
+	public void setProductCategory(String productCategory) {
+		this.productCategory = productCategory;
+	}
+    
+    
 }

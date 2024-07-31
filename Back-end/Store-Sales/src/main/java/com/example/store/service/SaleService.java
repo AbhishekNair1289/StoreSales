@@ -8,4 +8,5 @@ public interface SaleService {
 
     public Sale insertSale(Sale sale);
     public List<Sale> getMonthlySales();
+    public List<Sale> getAllSales();
 }

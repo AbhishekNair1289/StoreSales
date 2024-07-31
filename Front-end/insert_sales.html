@@ -19,6 +19,7 @@
     </nav>
     <div class="container">
         <h2>Insert Sales Data</h2>
+        <div id="message" class="message"></div>
         <form id="sales-form">
             <label for="item">Item</label>
             <input type="text" id="item" name="item" required>
@@ -26,8 +27,11 @@
             <label for="quantity">Quantity</label>
             <input type="number" id="quantity" name="quantity" min="1" required>
 
-            <label for="price">Price</label>
-            <input type="number" id="price" name="price" step="0.01" min="0.01" required>
+            <label for="pricePerUnit">Price per Unit</label>
+            <input type="number" id="pricePerUnit" name="pricePerUnit" step="0.01" min="0.01" required>
+
+            <label for="totalPrice">Total Price</label>
+            <input type="number" id="totalPrice" name="totalPrice" step="0.01" min="0.01" required>
 
             <label for="date">Date</label>
             <input type="date" id="date" name="date" required>
@@ -44,6 +48,12 @@
                 <option value="credit">Credit</option>
                 <option value="debit">Debit</option>
             </select>
+
+            <label for="discount">Discount (%)</label>
+            <input type="number" id="discount" name="discount" step="0.01" min="0" max="100" required>
+
+            <label for="productCategory">Product Category</label>
+            <input type="text" id="productCategory" name="productCategory" required>
 
             <input type="submit" value="Insert Sale">
         </form>
