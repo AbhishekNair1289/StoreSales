@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     salesData.forEach((sale) => {
       const row = salesTable.insertRow();
       row.innerHTML = `
-              <td>${sale.itemcode}</td>
+              <td>${sale.itemCode}</td>
               <td>${sale.item}</td>
               <td>${sale.quantity}</td>
               <td>${sale.pricePerUnit.toFixed(2)}</td>
