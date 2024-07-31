@@ -7,6 +7,7 @@
     <title>View Sales</title>
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
 </head>
 
 <body>
@@ -21,6 +22,18 @@
     <div class="container">
         <h2>View Sales Data</h2>
         <div id="message" class="message"></div>
+
+
+        <div class="date-filter-container">
+            <label for="from-date">From Date:</label>
+            <input type="date" id="from-date" name="from-date">
+            <label for="to-date">To Date:</label>
+            <input type="date" id="to-date" name="to-date">
+
+        </div>
+        <button id="filter-button"
+            style="width: 5%; background-color: gray; padding: 5px; text-align: center; color: aliceblue; font-weight: bold; position: relative; justify-content: center; display: flex;">Filter</button>
+
         <canvas id="sales-chart"></canvas>
         <table id="sales-table">
             <thead>
@@ -37,9 +50,7 @@
                     <th>Product Category</th>
                 </tr>
             </thead>
-            <tbody>
-
-            </tbody>
+            <tbody></tbody>
         </table>
     </div>
     <script src="js/view_sales.js"></script>

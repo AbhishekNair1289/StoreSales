@@ -3,11 +3,24 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("sales-table")
     .querySelector("tbody");
   const message = document.getElementById("message");
+  const filterButton = document.getElementById("filter-button");
+
+  filterButton.addEventListener("click", () => {
+    const fromDate = document.getElementById("from-date").value;
+    const toDate = document.getElementById("to-date").value;
+    fetchSalesData(fromDate, toDate);
+  });
 
   // Function to fetch sales data
-  const fetchSalesData = async () => {
+  const fetchSalesData = async (fromDate = "", toDate = "") => {
     try {
-      const response = await fetch("http://127.0.0.1:8081/api/sales/all");
+      const queryParams = new URLSearchParams();
+      if (fromDate) queryParams.append("fromDate", fromDate);
+      if (toDate) queryParams.append("toDate", toDate);
+
+      const response = await fetch(
+        `http://127.0.0.1:8081/api/sales/all?${queryParams.toString()}`
+      );
 
       if (!response.ok) {
         throw new Error("Failed to fetch sales data");
@@ -24,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function to display sales data in the table
   const displaySalesData = (salesData) => {
-    salesTable.innerHTML = ""; // Clear existing data
+    salesTable.innerHTML = "";
 
     salesData.forEach((sale) => {
       const row = salesTable.insertRow();
@@ -50,7 +63,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const labels = salesData.map((sale) => new Date(sale.date));
     const totalSales = salesData.map((sale) => sale.totalPrice);
 
-    new Chart(ctx, {
+    if (window.salesChart) {
+      window.salesChart.destroy();
+    }
+
+    window.salesChart = new Chart(ctx, {
       type: "bar",
       data: {
         labels: labels,
@@ -92,6 +109,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Fetch sales data when the page loads
   fetchSalesData();
 });

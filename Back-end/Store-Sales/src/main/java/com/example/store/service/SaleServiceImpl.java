@@ -34,6 +34,13 @@ public class SaleServiceImpl implements SaleService{
 	public List<Sale> getAllSales() {
 		return repo.findAll();
 	}
+	
+	@Override
+	public List<Sale> getSalesByDateRange(LocalDate fromDate, LocalDate toDate) {
+        return repo.findAllByDateBetween(fromDate, toDate);
+    }
+
+	
     
     
 }

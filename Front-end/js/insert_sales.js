@@ -47,16 +47,14 @@ document.addEventListener("DOMContentLoaded", () => {
               return response.json();
           })
           .then((data) => {
-              console.log("Success:", data);
-              // Display success message to the user
+              console.log("Success:", data);   // Display success message to the user
               document.getElementById("message").innerText =
                   "Sale inserted successfully!";
               document.getElementById("message").style.backgroundColor = "#4CAF50";
               form.reset();
           })
           .catch((error) => {
-              console.error("Error:", error);
-              // Display error message to the user
+              console.error("Error:", error);  // Display error message to the user
               document.getElementById(
                   "message"
               ).innerText = `Error: ${error.message}`;

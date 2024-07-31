@@ -49,8 +49,6 @@ public class Sale {
     @NotNull(message = "Product category is required")
     private String productCategory;
 
-    // Getters and Setters
-
     public Long getId() {
         return id;
     }

@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +25,7 @@ public class SalesController {
     @Autowired
     private SaleService saleService;
 
-    @CrossOrigin(origins = "http://127.0.0.1:5500") // or use "http://localhost:5500"
+    @CrossOrigin(origins = "http://127.0.0.1:5500") 
     @PostMapping("/insert_sales")
     public ResponseEntity<?> insertSale(@Valid @RequestBody Sale sale) {
     	try {
@@ -41,8 +42,14 @@ public class SalesController {
     }
     
     @GetMapping("/all")
-    public ResponseEntity<List<Sale>> getAllSales() {
-        List<Sale> sales = saleService.getAllSales();
-        return ResponseEntity.ok(sales);
+    public List<Sale> getAllSales(@RequestParam(required = false) String fromDate,
+                                  @RequestParam(required = false) String toDate) {
+        if (fromDate != null && toDate != null) {
+            LocalDate from = LocalDate.parse(fromDate);
+            LocalDate to = LocalDate.parse(toDate);
+            return saleService.getSalesByDateRange(from, to);
+        } else {
+            return saleService.getAllSales();
+        }
     }
 }
