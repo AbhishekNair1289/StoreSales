@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       // Send POST request to the backend
-      fetch("http://127.0.0.1:8081/api/sales/insert_sales", {
+      fetch("http://127.0.0.1:8080/api/sales/insert_sales", {
           method: "POST",
           headers: {
               "Content-Type": "application/json",

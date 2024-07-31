@@ -40,7 +40,4 @@ public class SaleServiceImpl implements SaleService{
         return repo.findAllByDateBetween(fromDate, toDate);
     }
 
-	
-    
-    
 }

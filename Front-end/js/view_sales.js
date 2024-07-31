@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (toDate) queryParams.append("toDate", toDate);
 
       const response = await fetch(
-        `http://127.0.0.1:8081/api/sales/all?${queryParams.toString()}`
+        `http://127.0.0.1:8080/api/sales/all?${queryParams.toString()}`
       );
 
       if (!response.ok) {

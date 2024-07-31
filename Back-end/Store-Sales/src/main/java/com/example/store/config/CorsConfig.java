@@ -12,7 +12,7 @@ public class CorsConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.addAllowedOrigin("http://127.0.0.1:5500"); // or use "http://localhost:5500"
+        corsConfiguration.addAllowedOrigin("http://127.0.0.1:5500"); 
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod("*");
 
