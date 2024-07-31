@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const result = await response.json();
       message.innerText = "Sale inserted successfully!";
+      form.reset();
       message.classList.add("success");
       message.classList.remove("error");
     } catch (error) {
